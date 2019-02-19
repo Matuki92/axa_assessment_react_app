@@ -25,6 +25,8 @@
 I made this app as a technical test for AXA, it loads all the gnomes in a village and lets the user find them by either using some filters or picking a random one.
 This is the first project I use Redux with, it was both challenging and fun and helped me learn a lot about this technology.
 
+tip: reload the page a couple of times for some fun facts about the gnomes ;)
+
 ### TECHNOLOGIES USED
 
   - [React] frontend library.
