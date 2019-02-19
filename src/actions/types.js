@@ -10,6 +10,10 @@ export const GNOMES_DATA = 'GNOMES_DATA';
 // search result
 export const SEARCH_RESULT = 'SEARCH_RESULT';
 /* 
+  loading
+*/
+export const LOADING_GNOMES = 'LOADING_GNOMES';
+/* 
   errors
 */
 // fetch error for gnome specific fetch actions

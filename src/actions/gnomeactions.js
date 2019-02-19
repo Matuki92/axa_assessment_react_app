@@ -1,8 +1,10 @@
 import { 
   FETCH_GNOMES, SELECTED_GNOME, GNOMES_DATA, SEARCH_RESULT,
-  GNOME_FETCH_ERROR
+  GNOME_FETCH_ERROR,
+  LOADING_GNOMES
 } from './types';
 
+// set gnome gender
 const setGender = gnome => {
   const fullName = gnome.name;
   // save first name in variable
@@ -15,11 +17,21 @@ const setGender = gnome => {
   return isFemale ? 'Female' : 'Male';
 }
 
+// gnome fetch
 export const fetchGnomes = () => async dispatch => {
 
-  // sends fetch error and turns loading to false
-  const catchErr = () => {
-    dispatch({ type: GNOME_FETCH_ERROR });
+  // set loading to true
+  dispatch({
+    type: LOADING_GNOMES,
+    payload: true
+  });
+
+  //  turns loading to false
+  const loadingToFalse = () => {
+    dispatch({
+      type: LOADING_GNOMES,
+      payload: false
+    });
   }
   
   try {
@@ -32,16 +44,18 @@ export const fetchGnomes = () => async dispatch => {
       const list = data.Brastlewark;
       // set gnome gender
       list.forEach(gnome => gnome.gender = setGender(gnome));
-      // dispatch new data
-      return dispatch({
+      // send data and turn loading to false
+      dispatch({
         type: FETCH_GNOMES,
         payload: list
       });
+      return loadingToFalse();
     }
     throw Error('fetch error');
   } catch (err) {
     console.log(err);
-    catchErr();
+    dispatch({ type: GNOME_FETCH_ERROR });
+    loadingToFalse();
   }
 }
 
