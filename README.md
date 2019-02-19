@@ -7,7 +7,7 @@
   $ git clone https://github.com/Matuki92/axa_assessment_react_app.git
   ```
   ```sh
-  cd axa-assessment_react_app
+  cd axa_assessment_react_app
   ```
   
   - install dependencies
