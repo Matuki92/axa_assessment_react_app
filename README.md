@@ -15,12 +15,10 @@
   $ npm install
   ```
   
-  - create build
+  - create build and run with node
   ```sh
   $ npm run build
   ```
-
-  - run server
   ```sh
   $ node app.js
   ```
