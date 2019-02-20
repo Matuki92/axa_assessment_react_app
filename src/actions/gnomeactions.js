@@ -3,6 +3,7 @@ import {
   GNOME_FETCH_ERROR,
   LOADING_GNOMES
 } from './types';
+import store from '../store/store';
 
 // set gnome gender
 const setGender = gnome => {
@@ -119,8 +120,8 @@ export const collectGnomesData = list => dispatch => {
 }
 
 // search gnomes with received filter
-export const gnomeSearch = (list, searchFilter) => dispatch => {
-  let searchResult = list;
+export const gnomeSearch = searchFilter => dispatch => {
+  let searchResult = store.getState().gnomes.list;
 
   // every iteration searches over the last iteration's result
   for (let filter in searchFilter) {
@@ -166,7 +167,9 @@ export const setSelectedGnome = gnome => dispatch => {
   });
 }
 
-export const getRandomGnome = list => dispatch => {
+export const getRandomGnome = () => dispatch => {
+  const list = store.getState().gnomes.list;
+
   // get gnome from list generating a random index
   const randomGnome = list[Math.floor(Math.random() * list.length)];
 

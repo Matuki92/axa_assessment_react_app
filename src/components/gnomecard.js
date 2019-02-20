@@ -1,8 +1,9 @@
 // react
 import React from 'react';
+// redux
+import { connect } from 'react-redux';
 
 const GnomeCard = ({ gnome }) => {
-
   // render list of friends
   const renderFriends = () => {
     if (gnome.friends.length === 0) {
@@ -24,89 +25,97 @@ const GnomeCard = ({ gnome }) => {
   }
 
   return (
-    <section className="gnome-card-container">
+    <React.Fragment>
+      {gnome &&
+        <section className="gnome-card-container">
 
-      <div className="thumbnail-container">
-        {/* profile thumbnail */}
-        <img 
-          className="gnome-thumbnail"
-          src={gnome.thumbnail}
-          alt="gnome thumbnail"
-        />
-        <h3 className="gnome-name">{gnome.name}</h3>
-      </div>
+          <div className="thumbnail-container">
+            {/* profile thumbnail */}
+            <img 
+              className="gnome-thumbnail"
+              src={gnome.thumbnail}
+              alt="gnome thumbnail"
+            />
+            <h3 className="gnome-name">{gnome.name}</h3>
+          </div>
 
-      {/* general info container */}
-      <div className="gnome-info">
+          {/* general info container */}
+          <div className="gnome-info">
 
-        {/* properties */}
+            {/* properties */}
 
-        {/* age */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Age:</span></p> 
-          </div>
-          <div className="gnome-property-field">
-            <p>{gnome.age} years old.</p>
-          </div>
-        </div>
+            {/* age */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Age:</span></p> 
+              </div>
+              <div className="gnome-property-field">
+                <p>{gnome.age} years old.</p>
+              </div>
+            </div>
 
-        {/* gender */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Gender:</span></p>
-          </div>
-          <div className="gnome-property-field">
-            <p>{gnome.gender}.</p>
-          </div>
-        </div>
+            {/* gender */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Gender:</span></p>
+              </div>
+              <div className="gnome-property-field">
+                <p>{gnome.gender}.</p>
+              </div>
+            </div>
 
-        {/* hair color */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Hair Color:</span></p> 
-          </div>
-          <div className="gnome-property-field">
-            <p>{gnome.hair_color}.</p>
-          </div>
-        </div>
+            {/* hair color */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Hair Color:</span></p> 
+              </div>
+              <div className="gnome-property-field">
+                <p>{gnome.hair_color}.</p>
+              </div>
+            </div>
 
-        {/* weight */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Weight:</span></p> 
-          </div>
-          <div className="gnome-property-field">
-            <p>{parseFloat(gnome.weight).toFixed(1)} Kg.</p>
-          </div>
-        </div>
+            {/* weight */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Weight:</span></p> 
+              </div>
+              <div className="gnome-property-field">
+                <p>{parseFloat(gnome.weight).toFixed(1)} Kg.</p>
+              </div>
+            </div>
 
-        {/* height */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Height:</span></p> 
-          </div>
-          <div className="gnome-property-field">
-            <p>{parseFloat(gnome.height).toFixed(1)} Cm.</p>
-          </div>
-        </div>
+            {/* height */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Height:</span></p> 
+              </div>
+              <div className="gnome-property-field">
+                <p>{parseFloat(gnome.height).toFixed(1)} Cm.</p>
+              </div>
+            </div>
 
-        {/* friends and professions
-          these two share container, just to make it look nice in UI
-        */}
-        <div className="gnome-property-container">
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Friends with:</span></p> 
-            {renderFriends()}
+            {/* friends and professions
+              these two share container, just to make it look nice in UI
+            */}
+            <div className="gnome-property-container">
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Friends with:</span></p> 
+                {renderFriends()}
+              </div>
+              <div className="gnome-property-field">
+                <p><span className="gnome-property-name">Professions:</span></p> 
+                {renderProfessions()}
+              </div>
+            </div>
           </div>
-          <div className="gnome-property-field">
-            <p><span className="gnome-property-name">Professions:</span></p> 
-            {renderProfessions()}
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      }
+    </React.Fragment>
   );
 }
 
-export default React.memo(GnomeCard);
+const mapStateToProps = ({ gnomes }) => ({
+  gnome: gnomes.selectedGnome
+})
+
+export default connect(mapStateToProps)(GnomeCard);

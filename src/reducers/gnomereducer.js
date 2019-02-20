@@ -5,6 +5,7 @@ const initialState = {
   gnomes: {
     list: null,
     selectedGnome: null,
+    data: null,
     search: {
       searchResult: null,
       searchFilter: {}

@@ -20,6 +20,7 @@ class HomePage extends Component {
   componentDidUpdate(prevProps) {
     const { collectGnomesData, gnomeList, errors } = this.props; 
 
+    // check if prev state had a result
     // collect gnome data after retrieving the list
     if(!prevProps.gnomeList && !errors.fetchError) {
       collectGnomesData(gnomeList);
@@ -27,25 +28,14 @@ class HomePage extends Component {
   }
 
   render() {
-    const { selectedGnome, searchResult } = this.props;
- 
     return (
       <React.Fragment>
         <Header/>
 
-        {/* only render card when user selects a gnome
-          or picks a random one
-        */}
           <section className="container">
             <React.Fragment>
-              {  searchResult &&
-                <SearchResult/>
-              }
-              { selectedGnome && 
-                <GnomeCard
-                  gnome={selectedGnome}
-                />
-              }
+              <SearchResult/>
+              <GnomeCard/>
             </React.Fragment>
           </section>
 
@@ -60,9 +50,7 @@ const mapStateToProps = ({ errors, fetchGnomes, collectGnomesData, gnomes }) => 
   errors, 
   fetchGnomes, 
   collectGnomesData, 
-  gnomeList: gnomes.list,
-  searchResult: gnomes.search.searchResult,
-  selectedGnome: gnomes.selectedGnome
+  gnomeList: gnomes.list
 })
 
 export default connect(mapStateToProps, { fetchGnomes, collectGnomesData })(HomePage);

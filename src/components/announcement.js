@@ -4,7 +4,6 @@ import React from 'react';
 const Announcement = ({ data }) => {
   // generate random number between 0 and 10
   const num = Math.floor(Math.random() * 10);
-
   // renders a message based on the number previously defined
   // this component was made only for fun
   const renderAnnouncement = () => {
@@ -34,7 +33,7 @@ const Announcement = ({ data }) => {
         return `The youngest gnome is ${data.minAge} years old, still a long way to go!`
 
       case 8:
-        return `Right now, the top-trending hair color between gnomes is ${data.hairColors[Math.floor(Math.random() * data.hairColors.length - 1)]}, it may change later!`
+        return `Right now, the top-trending hair color between gnomes is ${data.hairColors[Math.floor(Math.random() * data.hairColors.length)]}, it may change later!`
 
       default: 
         return `This app was made with React, Redux, and love.`;

@@ -8,8 +8,8 @@ import Announcement from './announcement';
 import Loading from './loading';
 
 
-const Header = ({ errors, data, loadingGnomes }) => {
-
+const Header = ({ errors, data }) => {
+  
   return(
     <header id="header">
       <h1 className="title">Brastlewark</h1>
@@ -18,7 +18,7 @@ const Header = ({ errors, data, loadingGnomes }) => {
       {!errors.fetchError ?
         <React.Fragment>
           {/* show loading while fetching gnomes */}
-          { !loadingGnomes && data ?
+          { data ?
             <React.Fragment>
               <Announcement
                 data={data}
@@ -40,8 +40,7 @@ const Header = ({ errors, data, loadingGnomes }) => {
 // set state into component props
 const mapStateToProps = ({ errors, gnomes, loading }) => ({
   errors, 
-  data: gnomes.data,
-  loadingGnomes: loading.loadingGnomes
+  data: loading.loadingGnomes ? null : gnomes.data
 });
 
 export default connect(mapStateToProps)(Header);

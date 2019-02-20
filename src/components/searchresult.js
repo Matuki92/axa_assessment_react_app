@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setSelectedGnome } from '../actions/gnomeactions';
 
 const SearchResult = ({ searchResult, setSelectedGnome }) => {
-
+  
   // render search result
   const renderSearchResult = () => {
     return searchResult.map(gnome => {
@@ -29,24 +29,28 @@ const SearchResult = ({ searchResult, setSelectedGnome }) => {
   }
 
   return (
-    <div className="searchresult-container">
-      {/* show number of gnomes */}
-      {searchResult.length} gnomes found!
+    <React.Fragment>
+      {searchResult &&   
+        <div className="searchresult-container">
+          {/* show number of gnomes */}
+          {searchResult.length} gnomes found!
 
-      {/* result dropdown */}
-      <select 
-        onChange={handleSelectedGnome}
-      >
-        <option>Show result</option>
-        {renderSearchResult()}
-      </select>
-      
-    </div>
+          {/* result dropdown */}
+          <select 
+            onChange={handleSelectedGnome}
+            >
+            <option>Show result</option>
+            {renderSearchResult()}
+          </select>
+          
+        </div>
+      }
+    </React.Fragment> 
   );
 }
 
-const mapStateToProps = ({ selectedGnome, gnomes }) => ({
-  selectedGnome,
+const mapStateToProps = ({ setSelectedGnome, gnomes }) => ({
+  setSelectedGnome,
   searchResult: gnomes.search.searchResult
 })
 

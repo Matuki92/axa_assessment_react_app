@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { gnomeSearch, getRandomGnome } from '../actions/gnomeactions';
 // components
 
-const SearchBox = ({ searchFilter, gnomeData, gnomeList, gnomeSearch, getRandomGnome }) => {
-
+const SearchBox = ({ searchFilter, gnomeData, gnomeSearch, getRandomGnome }) => {
+  
   // render gnome professions
   const renderProfessions = () => {
     return gnomeData.professions.map(p => {
@@ -27,19 +27,15 @@ const SearchBox = ({ searchFilter, gnomeData, gnomeList, gnomeSearch, getRandomG
 
   // filter gnomes when the user modifies the select tag
   const handleGnomeSearch = ({ target }) => {
+    
     const val = target.value;
 
     if (val !== 'Profession' &&
       val !== 'Hair Color' &&
       val !== 'Gender') {
       searchFilter[target.name] = val;
-      gnomeSearch(gnomeList, searchFilter);
+      gnomeSearch(searchFilter);
     }
-  }
-
-  // get random gnome
-  const handleRandomGnomeSearch = () => {
-    getRandomGnome(gnomeList);
   }
 
   return(
@@ -86,7 +82,7 @@ const SearchBox = ({ searchFilter, gnomeData, gnomeList, gnomeSearch, getRandomG
           <div className="searchbox-item">
             <button 
               type="button"
-              onClick={handleRandomGnomeSearch}
+              onClick={() => getRandomGnome()}
             >
               Random pick
             </button>
@@ -102,7 +98,6 @@ const mapStateToProps = ({ gnomeSearch, getRandomGnome, gnomes }) => ({
   gnomeSearch,
   getRandomGnome,
   searchFilter: gnomes.search.searchFilter,
-  gnomeList: gnomes.list,
   gnomeData: gnomes.data
 });
 
