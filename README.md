@@ -14,6 +14,11 @@
   ```sh
   $ npm install
   ```
+  
+  - create build
+  ```sh
+  $ npm run build
+  ```
 
   - run server
   ```sh
