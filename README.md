@@ -17,7 +17,12 @@
 
   - run server
   ```sh
-  $ npm start
+  $ node app.js
+  ```
+  
+  - access the app in
+  ```sh
+  localhost:8080
   ```
   
   ### APP INFO
